@@ -4,7 +4,7 @@
 // Pinos do LoRa (ESP32)
 #define SS   5    // NSS
 #define RST  14   // Reset
-#define DIO0 26   // Interrupção
+#define DIO0 2   // Interrupção
 
 int contador = 1;
 String mensagem = "";
