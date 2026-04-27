@@ -4,7 +4,7 @@
 // Pinos do LoRa (ESP32)
 #define SS   5
 #define RST  14
-#define DIO0 26
+#define DIO0 2
 
 void setup() {
   Serial.begin(115200);
