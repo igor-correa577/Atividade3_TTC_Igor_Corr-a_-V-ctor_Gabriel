@@ -1,0 +1,44 @@
+#include <SPI.h>
+#include <LoRa.h>
+
+// Pinos do LoRa (ESP32)
+#define SS   5    // NSS
+#define RST  14   // Reset
+#define DIO0 26   // Interrupção
+
+int contador = 1;
+String mensagem = "";
+
+void setup() {
+  Serial.begin(115200);
+  while (!Serial);
+
+  Serial.println("Iniciando transmissor LoRa...");
+
+  LoRa.setPins(SS, RST, DIO0);
+
+  if (!LoRa.begin(915E6)) {  // Frequência (Brasil: 915 MHz)
+    Serial.println("Erro ao iniciar LoRa!");
+    while (true);
+  }
+
+  Serial.println("LoRa iniciado com sucesso!");
+  Serial.println("Digite uma mensagem e pressione ENTER:");
+}
+
+void loop() {
+  if (Serial.available()) {
+    mensagem = Serial.readStringUntil('\n');
+
+    String msgFinal = "Mensagem #" + String(contador) + ": " + mensagem;
+
+    Serial.println("Enviando -> " + msgFinal);
+
+    // Envio LoRa
+    LoRa.beginPacket();
+    LoRa.print(msgFinal);
+    LoRa.endPacket();
+
+    contador++;
+  }
+}
