@@ -13,4 +13,6 @@ Conexões ESP32 para LoRa:
 
 -sinal SS - Pino 5 
 -sinal Reset - Pino 14
--sinal
+-sinal DIO0 (interrupção) - Pino 2 
+
+Comunicação realizada via interface SPI 
